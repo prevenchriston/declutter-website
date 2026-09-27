@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://thedeclutterteam.com/sitemap.xml
+Sitemap: https://www.thedeclutterteam.com/sitemap.xml

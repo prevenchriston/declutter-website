@@ -36,7 +36,7 @@ CACHE = ROOT / '.cache'
 SITE = {
     'name': 'Declutter Junk Removal',
     'short': 'Declutter',
-    'url': 'https://thedeclutterteam.com',
+    'url': 'https://www.thedeclutterteam.com',
     'phone': '(316) 749-8109',
     'tel': '+13167498109',
     'email': 'infodeclutterteam@gmail.com',
