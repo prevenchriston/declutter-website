@@ -1309,6 +1309,8 @@ def seo_files():
     urls = ''.join(f'<url><loc>{u}</loc><lastmod>{today}</lastmod></url>' for u in PAGES)
     (OUT / 'sitemap.xml').write_text(
         f'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>')
+    # Google Search Console ownership file — keep it, or verification is lost
+    (OUT / 'google493b3f5b095c62f2.html').write_text('google-site-verification: google493b3f5b095c62f2.html')
     (OUT / 'robots.txt').write_text(f'User-agent: *\nAllow: /\nSitemap: {SITE["url"]}/sitemap.xml\n')
 
 
