@@ -11,7 +11,8 @@ then run `python3 build.py`. Images are resized and converted to WebP automatica
 | cleanout-in-progress      | Move-Out & Property Cleanouts card + page          |
 | loaded-trailer            | Basement & Attic card + page (replace with a real basement/attic job when you have one) |
 | crew-member               | Home "Local crew" section, About page, video poster |
-| crew-vests                | Home "Local crew", About hero, photo strip         |
+| crew-team                | About page main photo                              |
+| crew-vests                | Home "Local crew", photo strip                     |
 | disposal-dumpster         | Home "Donation & disposal", About page             |
 | garage-after-wide         | Home photo strip                                   |
 

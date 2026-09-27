@@ -1040,7 +1040,7 @@ def about():
       <h1 class="h1" data-split>More than junk removal. We're here to help.</h1>
       <p class="lead" data-reveal>The Declutter Team started with a simple idea: work hard, treat people right, and leave every space better than we found it.</p>
     </div>
-    <div class="page-hero-media" data-reveal data-parallax>{img('crew-vests', 'The Declutter crew walking into a Wichita transfer station in branded safety vests', '(min-width: 980px) 42vw, 100vw', eager=True)}</div>
+    <div class="page-hero-media" data-reveal data-parallax>{img('crew-team', 'The Declutter crew giving a thumbs up in front of a fully loaded box truck after a Wichita cleanout', '(min-width: 980px) 42vw, 100vw', eager=True)}</div>
   </div>
 </section>
 <section class="section surface">
