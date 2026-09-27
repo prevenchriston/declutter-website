@@ -623,7 +623,10 @@ def page(path, title, desc, main, active='', schema=(), noindex=False, preload='
 <meta property="og:url" content="{canonical}">
 <meta property="og:image" content="{SITE['url']}/assets/brand/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="/assets/brand/favicon-32.png" sizes="32x32">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/assets/brand/favicon-96.png" type="image/png" sizes="96x96">
+<link rel="icon" href="/assets/brand/icon-192.png" type="image/png" sizes="192x192">
+<link rel="manifest" href="/site.webmanifest">
 <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1249,12 +1252,28 @@ def build_brand():
             if a > 200 and g > 150 and r < 150:
                 xs.append(x); ys.append(y)
     leaf = im.crop((min(xs), min(ys), max(xs) + 2, max(ys) + 2))
-    for size, name in ((512, 'icon-512.png'), (180, 'apple-touch-icon.png'), (32, 'favicon-32.png')):
+    # Keep only the green leaf: drop the white letters that fall inside its box
+    lp = leaf.load()
+    for y in range(leaf.height):
+        for x in range(leaf.width):
+            r, g, b, a = lp[x, y]
+            if not (g > r + 25 and g > b + 25):
+                lp[x, y] = (0, 0, 0, 0)
+    leaf = leaf.crop(leaf.getbbox())
+    for size, name in ((512, 'icon-512.png'), (192, 'icon-192.png'), (180, 'apple-touch-icon.png'), (96, 'favicon-96.png'), (48, 'favicon-48.png'), (32, 'favicon-32.png')):
         canvas = Image.new('RGBA', (size, size), (11, 14, 12, 255))
         l = leaf.copy()
         l.thumbnail((int(size * .7), int(size * .7)), Image.LANCZOS)
         canvas.alpha_composite(l, ((size - l.width) // 2, (size - l.height) // 2))
         canvas.convert('RGB').save(dest / name)
+    # Classic /favicon.ico at the site root (Google and older browsers look here)
+    ico = Image.open(dest / 'icon-512.png')
+    ico.save(OUT / 'favicon.ico', sizes=[(16, 16), (32, 32), (48, 48)])
+    (OUT / 'site.webmanifest').write_text(json.dumps({
+        'name': SITE['name'], 'short_name': SITE['short'], 'start_url': '/', 'display': 'standalone',
+        'background_color': '#0B0E0C', 'theme_color': '#0B0E0C',
+        'icons': [{'src': '/assets/brand/icon-192.png', 'sizes': '192x192', 'type': 'image/png'},
+                  {'src': '/assets/brand/icon-512.png', 'sizes': '512x512', 'type': 'image/png'}]}))
 
     # Social share image
     og = Image.new('RGB', (1200, 630), (11, 14, 12))
